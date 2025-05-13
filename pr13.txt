@@ -1,0 +1,67 @@
+% McCulloch-Pitts Neuron Model for AND and NOT functions
+
+% Define the inputs for AND and NOT functions
+% AND function input combinations (x1, x2)
+inputs_and = [0 0; 0 1; 1 0; 1 1];
+% NOT function input (x1)
+inputs_not = [0; 1];
+
+% Define weights and threshold for AND function
+weights_and = [1, 1];  % Both weights set to 1 for AND
+threshold_and = 1.5;    % Threshold for AND operation
+
+% Define weights and threshold for NOT function
+weights_not = -1;       % Weight for NOT function (single input)
+threshold_not = -0.5;   % Threshold for NOT operation
+
+% McCulloch-Pitts Neuron for AND function
+% Calculate the output for AND function
+output_and = zeros(4, 1);
+for i = 1:4
+    sum_and = inputs_and(i, 1) * weights_and(1) + inputs_and(i, 2) * weights_and(2);
+    if sum_and >= threshold_and
+        output_and(i) = 1;  % Output 1 if sum >= threshold
+    else
+        output_and(i) = 0;  % Output 0 otherwise
+    end
+end
+
+% McCulloch-Pitts Neuron for NOT function
+% Calculate the output for NOT function
+output_not = zeros(2, 1);
+for i = 1:2
+    sum_not = inputs_not(i) * weights_not;
+    if sum_not >= threshold_not
+        output_not(i) = 1;  % Output 1 if sum >= threshold
+    else
+        output_not(i) = 0;  % Output 0 otherwise
+    end
+end
+
+% Display the results
+disp('AND function output:');
+disp(output_and);  % Output for AND function
+
+disp('NOT function output:');
+disp(output_not);  % Output for NOT function
+
+% Plotting the outputs for visualization
+figure;
+
+% AND function plot
+subplot(1, 2, 1);
+stem(0:3, output_and, 'filled', 'LineWidth', 2);
+title('AND Function Output');
+xlabel('Input Combination');
+ylabel('Output');
+xticks([0 1 2 3]);
+xticklabels({'(0,0)', '(0,1)', '(1,0)', '(1,1)'});
+
+% NOT function plot
+subplot(1, 2, 2);
+stem(0:1, output_not, 'filled', 'LineWidth', 2);
+title('NOT Function Output');
+xlabel('Input');
+ylabel('Output');
+xticks([0 1]);
+xticklabels({'0', '1'});

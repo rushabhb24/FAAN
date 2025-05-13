@@ -1,0 +1,52 @@
+% Define the input range for plotting
+x = -10:0.1:10;
+
+% Sigmoid Activation Function
+sigmoid = 1 ./ (1 + exp(-x));
+
+% ReLU Activation Function
+relu = max(0, x);
+
+% Tanh Activation Function
+tanh_func = tanh(x);
+
+% Leaky ReLU Activation Function
+leaky_relu = max(0.1 * x, x);  % alpha = 0.1
+
+% Plot the activation functions
+figure;
+
+% Plot Sigmoid
+subplot(2,2,1);
+plot(x, sigmoid, 'LineWidth', 2);
+title('Sigmoid Activation Function');
+xlabel('x');
+ylabel('Sigmoid(x)');
+grid on;
+
+% Plot ReLU
+subplot(2,2,2);
+plot(x, relu, 'LineWidth', 2);
+title('ReLU Activation Function');
+xlabel('x');
+ylabel('ReLU(x)');
+grid on;
+
+% Plot Tanh
+subplot(2,2,3);
+plot(x, tanh_func, 'LineWidth', 2);
+title('Tanh Activation Function');
+xlabel('x');
+ylabel('Tanh(x)');
+grid on;
+
+% Plot Leaky ReLU
+subplot(2,2,4);
+plot(x, leaky_relu, 'LineWidth', 2);
+title('Leaky ReLU Activation Function');
+xlabel('x');
+ylabel('Leaky ReLU(x)');
+grid on;
+
+% Adjust layout
+sgtitle('Activation Functions');

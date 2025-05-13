@@ -1,0 +1,30 @@
+% Crab Classification using patternnet
+
+% Sample feature matrix (inputs) and labels (targets)
+% Each column is a sample: [Feature1; Feature2; ...]
+inputs = [5.5 6.0 5.8 7.0 6.5 7.2;
+          3.2 3.3 3.1 3.8 3.6 3.9];  % Example features (e.g., width and length)
+
+% Class labels: 0 for species A, 1 for species B
+targets = [0 0 0 1 1 1];
+
+% Convert targets to one-hot encoding
+targets_onehot = full(ind2vec(targets + 1));  % +1 because MATLAB indices start from 1
+
+% Create and configure neural network
+net = patternnet(10);  % 10 neurons in hidden layer
+
+% Train the network
+[net, tr] = train(net, inputs, targets_onehot);
+
+% Test the network
+outputs = net(inputs);
+predicted_classes = vec2ind(outputs) - 1;  % Subtract 1 to match original labels
+
+% Display results
+disp('Predicted Classes:');
+disp(predicted_classes);
+
+% Plot performance and confusion matrix
+figure, plotperform(tr)
+figure, plotconfusion(targets_onehot, outputs)
